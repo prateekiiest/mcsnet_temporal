@@ -1,0 +1,128 @@
+###################################################################################################
+#Replace the dataset name in the commands below. One of: 
+#['msrc_21_500qgrlarge','ptc_mm_500qgrlarge','ptc_fr_500qgrlarge', \
+# 'ptc_mr_500qgrlarge','ptc_fm_500qgrlarge','cox2_500qgrlarge','dd_500qgrlarge']
+###################################################################################################
+
+
+######################GMN (MCS) #######################################
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_match_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_match_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_match_newrun1_combo3e-1_FlagOff --training_mode="mse" --gt_mode="combo" --COMBO=0.3  --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_match_newrun1_combo7e-1_FlagOff --training_mode="mse" --gt_mode="combo" --COMBO=0.7  --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+######################GEN (MCS) #######################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_embed_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_embed_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_embed_newrun1_combo3e-1_FlagOff --training_mode="mse" --gt_mode="combo" --COMBO=0.3  --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_GMN_embed_newrun1_combo7e-1_FlagOff --training_mode="mse" --gt_mode="combo" --COMBO=0.7  --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+##################################### GEN ###########################################################
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T5_GMN_embed_nomin_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T5_GMN_embed_nomin_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+#####################################GMN ###########################################################
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T5_GMN_match_nomin_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T5_GMN_match_nomin_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+##################################### ISONET ###########################################################
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=ISONET_baseline_newrun1_FlagOff_edgeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=ISONET_baseline_newrun1_FlagOff_edgeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+##################################### ISONET (MCS) ###########################################################
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=ISONET_for_mcs_newrun1_FlagOff_edgeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=ISONET_for_mcs_newrun1_FlagOff_edgeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+##################################### LMCES (final layer)  ###########################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+########################### SimGNN ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=SimGNN_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=SimGNN_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+########################### GOTSim ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=GOTSim_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=GOTSim_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+########################### GraphSim ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=GraphSim_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=GraphSim_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+########################### NeuroMatch ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=NeuroMatch_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="qap" --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=NeuroMatch_for_mcs_newrun1_FlagOff --training_mode="mse" --gt_mode="gossip_qap" --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+######################### LMCCS (no gossip) ############################################
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=IsoNetVar29ForMcs_newrun1_FlagOff_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=IsoNetVar29ForMcs_newrun1_FlagOff_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+
+########################### XMCS ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=AsymCrossSinkhorn_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=AsymCrossSinkhorn_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=AsymCrossSinkhorn_T3_ISONET_for_mcs_newrun1_combo3e-1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0  --gt_mode="combo" --COMBO=0.3 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=AsymCrossSinkhorn_T3_ISONET_for_mcs_newrun1_combo7e-1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0  --gt_mode="combo" --COMBO=0.7 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+
+##################################### LMCCS (no NOISE FILTER) ###########################################################
+
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=Try2Abaltion_NoThresh_IsoNetGossipVar29ForMcs_GossipVector_newrun1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+########################### LMCES ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=1 python -m mcs.models --TASK=AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+CUDA_VISIBLE_DEVICES=2 python -m mcs.models --TASK=AllLayersPos_T3_ISONET_for_mcs_newrun1_combo3e-1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.3 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=2 python -m mcs.models --TASK=AllLayersPos_T3_ISONET_for_mcs_newrun1_combo7e-1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.7 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+########################### AsymCrossSinkhorn_AllLayers_ISONET_node ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=AsymCrossSinkhorn_AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=2 python -m mcs.models --TASK=AsymCrossSinkhorn_AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+########################### LMCCS ##########################################################################
+###### Different hyperparameter for each dataset. Hence separate command provided for all 7 ################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp7e-1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=0.7 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp1e-1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=0.1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mr_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp8e-1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=0.8 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_fm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp14e-1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1.4 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_fr_500qgrlarge
+CUDA_VISIBLE_DEVICES=3 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp11e-1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1.1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=cox2_500qgrlarge
+CUDA_VISIBLE_DEVICES=3 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=msrc_21_500qgrlarge
+CUDA_VISIBLE_DEVICES=3 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_FlagOff_temp1e+1_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=10 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="gossip_qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=dd_500qgrlarge
+
+
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_combo3e-1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.3 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Try2_IsoNetGossipVar29ForMcs_GossipVectorLRLThreshold_newrun1_combo7e-1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.7 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+
+########################### COMBO ##########################################################################
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Combo_late_models_newrun1_combo3e-1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.3 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+CUDA_VISIBLE_DEVICES=0 python -m mcs.models --TASK=Combo_late_models_newrun1_combo7e-1_FlagOff_temp1e+0_nodeEmbEdgeScoreAdjMask_td16_lr1e-3_noise0 --GOSSIP_TEMP=1 --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="combo" --COMBO=0.7 --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+
+###########################33 LMCES (GCN)
+CUDA_VISIBLE_DEVICES=2 python -m mcs.models --TASK=GNN_AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0_GCN --CONV="GCN" --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
+###########################33 LMCES (GIN)
+CUDA_VISIBLE_DEVICES=2 python -m mcs.models --TASK=GNN_AllLayersPos_T3_ISONET_for_mcs_newrun1_FlagOff_nodeEmb_td16_lr1e-3_noise0_GIN --CONV="GIN" --training_mode="mse" --NOISE_FACTOR=0 --gt_mode="qap" --transform_dim=16 --LEARNING_RATE=0.001 --DATASET_NAME=ptc_mm_500qgrlarge
+
+
